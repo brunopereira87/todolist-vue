@@ -1,0 +1,82 @@
+$colors: (
+  'first': #25bd73,
+  'second': #80ffc1,
+  'highlight': #92921d,
+  'light': #fff,
+  'dark': #3f7058,
+  'error': #c70d0d,
+);
+
+$fontsizes: (
+  'small0': 8px,
+  'small1': 9px,
+  'small2': 10px,
+  'small3': 12px,
+  'normal': 14px,
+  'medium': 18px,
+  'medium2': 20px,
+  'large': 40px,
+  'huge': 62px,
+);
+$font1: Helvetica, Arial, sans-serif;
+$font2: 'Spectral', Georgia;
+$fontfamilies: (
+  'first': $font1,
+  'second': $font2,
+);
+$shadow_default: 0 0 4px 4px rgba(0, 0, 0, 0.25);
+$shadow_bottom: 0 6px 4px 0 rgba(0, 0, 0, 0.25);
+$center: 0 auto;
+$gutter: 32px;
+$section_margin: 30px;
+$title_margin: 20px;
+$micro_space: 5px;
+$smaller_space: 7px;
+$small_space: 10px;
+$medium_space: 15px;
+
+@mixin bgcolor($color) {
+  background-color: map-get($colors, $color);
+}
+@mixin bordercolor($color) {
+  border-color: map-get($colors, $color);
+}
+@mixin textcolor($color) {
+  color: map-get($colors, $color);
+}
+
+@mixin fontsize($size) {
+  font-size: map-get($fontsizes, $size);
+}
+@mixin fontfamily($family) {
+  font-family: map-get($fontfamilies, $family);
+}
+
+@mixin container_width($size) {
+  width: map-get($container_width, $size);
+}
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+@mixin circle($size) {
+  @include square($size);
+  border-radius: 50%;
+}
+@mixin border($size, $color, $corner: '', $style: solid) {
+  border#{$corner}: $size $style map-get($colors, $color);
+}
+@mixin bordered_photo($photo_size, $border_size, $border_color) {
+  @include circle($photo_size);
+  border: $border_size solid $border_color;
+}
+
+@mixin center-horizontal {
+  display: flex;
+  justify-content: center;
+}
+@mixin center-vertical {
+  display: flex;
+  align-items: center;
+}
