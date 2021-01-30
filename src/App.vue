@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    {{message}}
     <Header />
     <router-view />
   </div>
@@ -11,12 +10,7 @@ import Header from '@/components/shared/Header';
 export default {
   components:{
     Header,
-  },
-  data() {
-    return {
-      message: 'Hello World'
-    }
-  },
+  }
 }
 </script>
 <style lang="scss">
@@ -63,6 +57,9 @@ img {
   max-width: 100%;
 }
 
+.disabled{
+  opacity: 0.7;
+}
 button,
 input {
   display: block;

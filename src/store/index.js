@@ -28,6 +28,9 @@ export default new Vuex.Store({
       context.commit('UPDATE_LOGGED',false);
       context.commit('UPDATE_USER',cleanedUser);
       router.push('/login');
+    },
+    autologin(context){
+
     }
   },
   modules: {
