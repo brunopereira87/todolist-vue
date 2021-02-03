@@ -2,13 +2,17 @@ jest.mock('@/services/index');
 import api from '@/services/index';
 
 describe('api', () => {
-  describe('GET', () => {
-    test('should api exists', () => {
-      expect(api).toBeDefined();
+  test('should api exists', () => {
+    expect(api).toBeDefined();
+  });
+
+  describe('GET', () => {  
+    test('should api.get to be defined', () => {
+      expect(api.get).toBeDefined();
     });
 
-    test('should call api.get', () => {
-      
+    test('should api.get called with the proper URL', () => {
+      expect(api.get).toBeDefined();
     });
   });
   

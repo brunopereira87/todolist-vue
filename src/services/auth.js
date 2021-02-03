@@ -3,10 +3,8 @@ const endpoint = '/auth';
 
 const authService = {
   api,
-  logged(token) {
-    return api.get(endpoint + '/logged', {
-      Authorization: token
-    })
+  logged() {
+    return api.get(endpoint + '/logged')
   },
 
   register(body) {

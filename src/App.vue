@@ -1,15 +1,21 @@
 <template>
   <div id="app">
     <Header />
-    <router-view />
+    <main class="container">
+      <router-view />
+    </main>
   </div>
 </template>
 
 <script>
 import Header from '@/components/shared/Header';
+
 export default {
   components:{
     Header,
+  },
+  beforeMount(){
+    this.$store.dispatch('autologin');
   }
 }
 </script>
@@ -59,6 +65,7 @@ img {
 
 .disabled{
   opacity: 0.7;
+  cursor: not-allowed;
 }
 button,
 input {

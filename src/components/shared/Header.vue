@@ -5,7 +5,7 @@
         <h1 class="logo">
 
           <router-link to="/">
-            <!-- <Logo /> -->
+            <Logo />
           </router-link>
         </h1>
           <div class="leftNav" v-if="logged">
@@ -31,8 +31,12 @@
 <script>
 import { mapState } from 'vuex';
 import { mapActions } from 'vuex';
+import Logo from '@/components/shared/Logo';
 export default {
   name: "Header",
+  components:{
+    Logo
+  },
   computed: {
     ...mapState(['user','logged'])
   },

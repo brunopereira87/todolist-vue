@@ -2,19 +2,30 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login'
 import Categories from '../views/Categories/Categories'
+import Category from '../views/Categories/Category'
 
 Vue.use(VueRouter)
 
 const routes = [
+  
   {
     path: '/',
     name: 'Login',
     component: Login
   },
   {
+    path: '/login',
+    redirect:'/'
+  },
+  {
     path: '/categorias',
     name: 'Categorias',
     component: Categories
+  },{
+    path: '/categorias/:id',
+    name: 'Categorias',
+    component: Category,
+    props: true
   }
   // {
   //   path: '/about',

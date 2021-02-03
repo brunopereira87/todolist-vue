@@ -27,8 +27,6 @@ export default {
       this.$emit('input', value);
     },
     validate(value){
-      console.log('value:',value)
-      console.log('required:',this.required)
       if(this.required && !value) {
         this.error = `O campo ${this.label} é obrigatório`;
         this.valid = false;

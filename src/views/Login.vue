@@ -4,11 +4,8 @@
     <form class=form @submit.prevent="login">
       <Input type="email" name="email" label="E-mail" v-model="email" :v="$v.email" />
       <Input type="password" name="password" label="Senha" v-model="password" :v="$v.password" />
-
       <Button v-if="loading" :disabled="true">Carregando...</Button>
       <Button :disabled="$v.$invalid" v-else>Enviar</Button>
-
-
       <ErrorComponent v-if="error" :error="error" />
     </form>
   </section>
@@ -20,7 +17,7 @@ import Button from '@/components/shared/Button';
 import ErrorComponent from '@/components/shared/ErrorComponent';
 import { required, email, minLength } from 'vuelidate/lib/validators';
 import authService from '@/services/auth';
-import { setToken } from '@/helpers'; 
+import { setToken, getErrorMessage } from '@/helpers'; 
 import { mapMutations } from 'vuex';
 export default {
   components:{
@@ -62,7 +59,7 @@ export default {
         this.$router.push('/categorias');
         
       }catch(err){
-        this.error = err.response.data.error;
+        this.error = getErrorMessage(err);
       }
       finally{
         this.loading = false;

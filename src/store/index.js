@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '../router';
 
+import { getToken,removeToken } from '@/helpers';
+import authService from '@/services/auth';
+
 Vue.use(Vuex)
 
 const cleanedUser = {
@@ -27,9 +30,22 @@ export default new Vuex.Store({
     logout(context){
       context.commit('UPDATE_LOGGED',false);
       context.commit('UPDATE_USER',cleanedUser);
+      removeToken();
       router.push('/login');
     },
-    autologin(context){
+    async autologin(context){
+      const token = getToken();
+
+      if(token){
+        try{
+          const {data} = await authService.logged()
+          context.commit('UPDATE_USER',data.user)
+          context.commit('UPDATE_LOGGED',true)
+        } catch(err) {
+          console.log(err);
+          context.dispatch('logout');
+        }
+      }     
 
     }
   },

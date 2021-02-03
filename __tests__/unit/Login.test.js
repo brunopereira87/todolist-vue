@@ -103,16 +103,16 @@ describe('Login', () => {
       });
     });
 
-    test('should return email = bruno@email and password = qwe123 on login', () => {
-      setData(wrapper);
-      wrapper.vm.login();
-      expect(wrapper.vm.$data).toEqual({
-        email: 'bruno@email.com',
-        password: 'qwe123',
-        loading: true,
-        error: null
-      });
-    });
+    // test('should return email = bruno@email and password = qwe123 on login', () => {
+    //   setData(wrapper);
+    //   wrapper.vm.login();
+    //   expect(wrapper.vm.$data).toEqual({
+    //     email: 'bruno@email.com',
+    //     password: 'qwe123',
+    //     loading: true,
+    //     error: null
+    //   });
+    // });
 
     test('should call authService login ', () => { 
       expect(authService.login).toHaveBeenCalledTimes(1);
