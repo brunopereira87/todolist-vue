@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="handleSubmit" class="form">
     <div class="categoryInput">
-      <Input type="text" name="category" label="Categoria" v-model="category" :v="$v.category"/>
+      <Input type="text" name="category" label="Nome" v-model="category" :v="$v.category"/>
       <button class="btn-icon btn-icon-second" :disabled="$v.$invalid" :class="{disabled: $v.$invalid }">
         <i class="fas fa-check"></i>
       </button>
@@ -34,6 +34,7 @@ import IconSelector from '@/components/shared/IconSelector';
 import { required } from 'vuelidate/lib/validators';
 export default {
   name: 'CategoriesForm',
+  props:['previous_category'],
   components:{
     Input,
     IconSelector
@@ -44,6 +45,12 @@ export default {
       icon: null,
       showIcons: false,
       showPreview: false
+    }
+  },
+  beforeMount(){
+    if(this.previous_category) {
+      this.category = this.previous_category.name;
+      this.icon = this.previous_category.icon;
     }
   },
   validations:{
@@ -73,10 +80,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form{
-  width: 50%;
-  
-}
+
 .categoryInput{
   display: flex;
   align-items: center;

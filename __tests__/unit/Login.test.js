@@ -1,13 +1,16 @@
 
-jest.mock('@/services/auth');
+// jest.mock('@/services/auth');
+jest.mock('@/services/index');
 import { shallowMount } from '@vue/test-utils';
 import Vuelidate from 'vuelidate';
 import Vue from 'vue';
 
 import authService from '@/services/auth';
+import api from '@/services/index';
 Vue.use(Vuelidate);
 
 import Login from '@/views/Login';
+
 // import { after } from 'lodash';
 
 describe('Login', () => {
@@ -91,16 +94,16 @@ describe('Login', () => {
     
     beforeEach(()=>{
       setData(wrapper);
-      wrapper.vm.login();
+      // wrapper.vm.login();
 
-      authService.login.mockImplementation(()=> {
-        return Promise.resolve({
-          data: {
-            token: "",
-            user: {}
-          }
-        })
-      });
+      // authService.login.mockImplementation(()=> {
+      //   return Promise.resolve({
+      //     data: {
+      //       token: "",
+      //       user: {}
+      //     }
+      //   })
+      // });
     });
 
     // test('should return email = bruno@email and password = qwe123 on login', () => {
@@ -114,14 +117,11 @@ describe('Login', () => {
     //   });
     // });
 
-    test('should call authService login ', () => { 
-      expect(authService.login).toHaveBeenCalledTimes(1);
-    });
-
-    // test('should call authService.login with proper URL', () => {
-    //   console.log(authService);
-    //   expect(authService.login).toHaveBeenCalledWith('');
+    // test('should call authService login ', () => { 
+    //   expect(authService.login).toHaveBeenCalledTimes(1);
     // });
+
+    
   });
 
 });

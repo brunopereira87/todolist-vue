@@ -1,31 +1,31 @@
 $colors: (
-  'first': #25bd73,
-  'second': #80ffc1,
-  'highlight': #92921d,
-  'light': #fff,
-  'dark': #3f7058,
-  'error': #c70d0d,
+  "first": #25bd73,
+  "second": #80ffc1,
+  "highlight": #92921d,
+  "light": #fff,
+  "dark": #3f7058,
+  "error": #c70d0d,
 );
 
 $fontsizes: (
-  'small0': 8px,
-  'small1': 9px,
-  'small2': 10px,
-  'small3': 12px,
-  'normal': 14px,
-  'medium': 18px,
-  'medium2': 20px,
-  'large': 40px,
-  'huge': 62px,
+  "small0": 8px,
+  "small1": 9px,
+  "small2": 10px,
+  "small3": 12px,
+  "normal": 14px,
+  "medium": 18px,
+  "medium2": 20px,
+  "large": 40px,
+  "huge": 62px,
 );
 $font1: Helvetica, Arial, sans-serif;
-$font2: 'Spectral', Georgia;
+$font2: "Spectral", Georgia;
 $fontfamilies: (
-  'first': $font1,
-  'second': $font2,
+  "first": $font1,
+  "second": $font2,
 );
-$shadow_default: 0 0 4px 4px rgba(0, 0, 0, 0.25);
-$shadow_bottom: 0 6px 4px 0 rgba(0, 0, 0, 0.25);
+$shadow_default: 0 0 4px 4px rgba(map-get($colors, "second"), 0.25);
+$shadow_bottom: 0 6px 4px 0 rgba(map-get($colors, "second"), 0.25);
 $center: 0 auto;
 $gutter: 32px;
 $section_margin: 30px;
@@ -64,7 +64,7 @@ $medium_space: 15px;
   @include square($size);
   border-radius: 50%;
 }
-@mixin border($size, $color, $corner: '', $style: solid) {
+@mixin border($size, $color, $corner: "", $style: solid) {
   border#{$corner}: $size $style map-get($colors, $color);
 }
 @mixin bordered_photo($photo_size, $border_size, $border_color) {

@@ -19,11 +19,11 @@ const routes = [
   },
   {
     path: '/categorias',
-    name: 'Categorias',
+    name: 'Categories',
     component: Categories
   },{
     path: '/categorias/:id',
-    name: 'Categorias',
+    name: 'Category',
     component: Category,
     props: true
   }

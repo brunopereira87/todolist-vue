@@ -6,7 +6,15 @@ import Vuelidate from 'vuelidate'
 
 Vue.config.productionTip = false
 Vue.use(Vuelidate)
-
+Vue.mixin({
+  methods: {
+    getErrorMessage: (err) => {
+      if(err.response) return err.response.data.error;
+      else if(err.request) return err.request;
+      return err.message;
+    }
+  }
+})
 new Vue({
   router,
   store,
