@@ -8,6 +8,7 @@ Vue.config.productionTip = false
 Vue.use(Vuelidate)
 Vue.mixin({
   methods: {
+    catchAsync: fn => fn().catch(err => store.dispatch('setError',err)),
     getErrorMessage: (err) => {
       if(err.response) return err.response.data.error;
       else if(err.request) return err.request;

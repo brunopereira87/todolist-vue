@@ -114,7 +114,7 @@ a {
 }
 
 .container {
-  max-width: 50rem;
+  @include container_width('desktop');
   padding: 0 1rem;
   margin: 0 auto;
 }

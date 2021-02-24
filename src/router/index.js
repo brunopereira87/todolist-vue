@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login'
 import Categories from '../views/Categories/Categories'
 import Category from '../views/Categories/Category'
+import Tasks from '../views/Tasks/Tasks';
 
 Vue.use(VueRouter)
 
@@ -21,12 +22,18 @@ const routes = [
     path: '/categorias',
     name: 'Categories',
     component: Categories
-  },{
+  },
+  {
     path: '/categorias/:id',
     name: 'Category',
     component: Category,
     props: true
-  }
+  },
+  {
+    path: '/tarefas',
+    name: 'Tasks',
+    component: Tasks
+  },
   // {
   //   path: '/about',
   //   name: 'About',

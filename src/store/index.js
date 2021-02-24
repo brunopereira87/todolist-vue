@@ -16,7 +16,9 @@ const cleanedUser = {
 export default new Vuex.Store({
   state: {
     user: cleanedUser,
-    logged:false
+    logged:false,
+    error: null,
+    loading: false
   },
   mutations: {
     UPDATE_USER(state, payload){
@@ -24,6 +26,12 @@ export default new Vuex.Store({
     },
     UPDATE_LOGGED(state, payload){
       state.logged = payload;
+    },
+    UDPATE_ERROR(state, payload){
+      state.error = payload;
+    },
+    UPDATE_LOADING(state, payload){
+      state.loading = payload;
     }
   },
   actions: {
@@ -47,6 +55,9 @@ export default new Vuex.Store({
         }
       }     
 
+    },
+    setError(context, error){
+      console.log(error)
     }
   },
   modules: {

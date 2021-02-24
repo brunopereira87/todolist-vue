@@ -24,6 +24,18 @@ $fontfamilies: (
   "first": $font1,
   "second": $font2,
 );
+
+$container_width: (
+  "smartphone": 100%,
+  "tablet": 40rem,
+  "desktop": 60rem,
+);
+
+$breakpoints: (
+  "smartphone": 30rem,
+  "tablet": 50rem,
+  "desktop": 80rem,
+);
 $shadow_default: 0 0 4px 4px rgba(map-get($colors, "second"), 0.25);
 $shadow_bottom: 0 6px 4px 0 rgba(map-get($colors, "second"), 0.25);
 $center: 0 auto;
@@ -53,7 +65,7 @@ $medium_space: 15px;
 }
 
 @mixin container_width($size) {
-  width: map-get($container_width, $size);
+  max-width: map-get($container_width, $size);
 }
 
 @mixin square($size) {

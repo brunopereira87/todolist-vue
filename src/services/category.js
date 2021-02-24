@@ -9,6 +9,9 @@ const categoryService = {
   getCategory(id) {
     return api.get(`${endpoint}/${id}`);
   },
+  getCategoryTasks(id) {
+    return api.get(`${endpoint}/${id}/tasks`);
+  },
 
   createCategory(body) {
     return api.post(endpoint, body)

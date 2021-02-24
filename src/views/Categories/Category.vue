@@ -6,7 +6,13 @@
 
 <script>
 export default {
-  props:['id']
+  name: 'Category',
+  props:['id'],
+  data() {
+    return {
+      tasks: null
+    }
+  },
 }
 </script>
 
