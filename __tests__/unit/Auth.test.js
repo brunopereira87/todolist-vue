@@ -18,73 +18,123 @@ import api from '@/services/index';
 import authService from '@/services/auth';
 import data from '../../__mocks__/auth.json';
 
-describe('login', () => {
+describe('POST requests', () => {
+  let body;
+  const errorMessage = 'Network Error';
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+  beforeEach(()=> {
+    api.post.mockImplementation(() => {
+      return Promise.resolve({data})
+    });
+  });
+
+  describe('register', () => {
+    beforeAll(() =>{
+      body = {
+        name: 'Bruno Emanuel Pereira',
+        email: 'bruno@email.com',
+        password: 'qwe123'
+      }
+    });
+
+    beforeEach(()=> {
+      authService.register(body);
+    });
+
+    it('should call api.post', () => {
+      expect(api.post).toHaveBeenCalledTimes(1)
+    });
+
+    it('should call api.post with proper parameters',()=>{
+      expect(api.post).toHaveBeenCalledWith('/auth/register',body);
+    });
+
+    it('should return user data with token when api.post have been called', async () => {
+      const resp = await authService.register(body);
+      expect(resp.data).toBe(data)
+    });
+    it('should throw an error when api.register promise be rejected', async () => {
+      api.post.mockImplementationOnce(()=> 
+        Promise.reject(new Error(errorMessage))
+      );
+
+      await expect(authService.register(body)).rejects.toThrow(errorMessage);
+    });
+  });
+
+  describe('login', () => {
+    beforeAll(() => {
+      body = {
+        email: 'bruno@email.com',
+        password: 'qwe123'
+      }    
+  
+    });
+    beforeEach(() => {
+      authService.login(body);
+    });
+  
+    test('should call api.post have been called', () => {
+      expect(api.post).toHaveBeenCalledTimes(1);
+    });
+  
+    test('should call api.post with proper parameters', () => {
+      expect(api.post).toHaveBeenCalledWith('/auth/login',body);
+    });
+  
+    test('should return the user data with token at authService.login', async () => {
+      const response = await authService.login(body);
+      expect(response.data).toBe(data);
+    });
+  
+    test('should throw a error when authService.login promise rejects',async () => {
+      api.post.mockImplementationOnce(() =>
+        Promise.reject(new Error(errorMessage)),
+      );
+   
+      await expect(authService.login(body)).rejects.toThrow(errorMessage);
+    });
+  });
+});
+
+describe('GET requests', () => {
+  const errorMessage = 'Network Error';
   afterEach(() => {
     jest.resetAllMocks();
   });
 
-  let body;
-  let wrongBody;
-  beforeAll(() => {
-    body = {
-      email: 'bruno@email.com',
-      password: 'qwe123'
-    }    
-
-  });
   beforeEach(() => {
-    authService.login(body);
-    api.post.mockImplementation(() => {
-      return Promise.resolve({data})
-    });
-
-  });
-
-  test('should call api.post have been called', () => {
-    expect(api.post).toHaveBeenCalledTimes(1);
-  });
-
-  test('should call api.post with proper parameters', () => {
-    expect(api.post).toHaveBeenCalledWith('/auth/login',body);
-  });
-
-  test('should return the user data with token at authService.login', async () => {
-    const response = await authService.login(body);
-    expect(response.data).toBe(data);
-  });
-
-  test('should throw a error when authService.login promise rejects',async () => {
-    const errorMessage = 'Network Error';
- 
-    api.post.mockImplementationOnce(() =>
-      Promise.reject(new Error(errorMessage)),
-    );
- 
-    await expect(authService.login(body)).rejects.toThrow(errorMessage);
-  });
-});
-
-describe('logged', () => {
-  beforeEach(() => {
-    authService.logged();
     api.get.mockImplementation(() => {
       return Promise.resolve({ data });
     });
-    // api.post.mockImplementation(() => {
-    //   return Promise.resolve({data})
-    // });
   });
 
-  it('should api.get have been called once', () => {
-    expect(api.get).toHaveBeenCalledTimes(1)
-  });
+  describe('logged', () => {
+    beforeEach(() => {
+      authService.logged();
+    });
+  
+    it('should api.get have been called once', () => {
+      expect(api.get).toHaveBeenCalledTimes(1)
+    });
+  
+    it('should api.get have been called with proper URL', () => {
+      expect(api.get).toHaveBeenCalledWith('/auth/logged')
+    });
+  
+    it('should return the propper data', async () => {
+      const response = await authService.logged();
+      expect(response.data).toBe(data);
+    });
+  
+    it('should throw a when api.logged promised be rejected',async () => {
+      api.get.mockImplementationOnce(() => {
+        return Promise.reject(new Error(errorMessage));
+      });
 
-  it('should api.get have been called with proper URL', () => {
-    expect(api.get).toHaveBeenCalledWith('/auth/logged')
-  });
-
-  it('should return the propper data', async () => {
-    const response = await authService.logged();
-    expect(response.data).toBe(data);
+      await expect(authService.logged()).rejects.toThrow(errorMessage);
+    });
   });
 });

@@ -5,6 +5,13 @@ $colors: (
   "light": #fff,
   "dark": #3f7058,
   "error": #c70d0d,
+  "warning": #d68206,
+  "info": #2679bd,
+  "success": #3ba355,
+  "bgerror": #e24135,
+  "bgwarning": #f7e43c,
+  "bginfo": #5aa4e0,
+  "bgsuccess": #7de798,
 );
 
 $fontsizes: (
@@ -91,4 +98,9 @@ $medium_space: 15px;
 @mixin center-vertical {
   display: flex;
   align-items: center;
+}
+
+@mixin center-fixed($parent_width) {
+  left: 50%;
+  margin-left: -(map-get($container_width, $parent_width) / 2);
 }

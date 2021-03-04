@@ -1,12 +1,15 @@
 <template>
   <section class="tasks mainContainer">
     <div class="newTask">
-      <h2 class="title pageTitle">
-        {{previous_task ? 'Nova ': 'Editar '}} Tarefa
-        <TaskForm v-if="newForm" />
+      <h2 class="title section-title">
+        {{previous_task ? 'Editar ': 'Nova '}} Tarefa
       </h2>
+      <TaskForm v-if="newForm" />
     </div>
-    <TasksList v-if="tasks" :tasks="tasks" />
+    <div class="task">
+      <h2 class="title section-title">Suas Tarefas</h2>
+      <TasksList v-if="tasks" :tasks="tasks" />
+    </div>
   </section>
 </template>
 
@@ -32,7 +35,7 @@ export default {
     async getTasks(){
       try{
         const { data } = await taskService.getTasks()
-        this.tasks = data;
+        this.tasks = data.tasks;
       }catch(err) {
         console.log(err)
       }
@@ -45,5 +48,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.tasks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: $section_margin;
+  
+}
 </style>

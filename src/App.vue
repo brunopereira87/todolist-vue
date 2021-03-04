@@ -2,6 +2,9 @@
   <div id="app">
     <Header />
     <main class="container">
+      <transition name="alert">
+        <Alert v-if="alertMessage" :message="alertMessage" :type="alertType" /> 
+      </transition>
       <router-view />
     </main>
   </div>
@@ -9,14 +12,20 @@
 
 <script>
 import Header from '@/components/shared/Header';
-
+import Alert from '@/components/shared/Alert';
+import {mapActions, mapState} from 'vuex';
 export default {
   components:{
     Header,
+    Alert
   },
   beforeMount(){
     this.$store.dispatch('autologin');
-  }
+  },
+  computed: {
+    ...mapState(['alertMessage','alertType'])
+  },
+
 }
 </script>
 <style lang="scss">
@@ -70,12 +79,15 @@ img {
   cursor: not-allowed;
 }
 button,
-input {
+input,
+textarea,
+select {
   display: block;
   font-size: 1rem;
   @include fontfamily("first");
   color: #333;
 }
+
 .btn-link{
   cursor: pointer;
   padding: 0;
@@ -124,5 +136,16 @@ a {
 }
 section {
   margin-top: 3rem;
+}
+
+.alert-enter,
+.alert-leave-to{
+  opacity: 0;
+  transform: translateY(-50px);
+}
+
+.alert-enter-active,
+.alert-leave-active{
+  transition: all .5s;
 }
 </style>

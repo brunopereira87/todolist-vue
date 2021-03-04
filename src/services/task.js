@@ -3,11 +3,11 @@ const endpoint = '/tasks';
 
 const taskService = {
   api,
-  getTasks() {
-    return api.get(endpoint)
+  getTasks(query = '') {
+    return api.get(endpoint+query)
   },
-  getTask(id) {
-    return api.get(`${endpoint}/${id}`);
+  getTask(id,query = '') {
+    return api.get(`${endpoint}/${id}${query}`);
   },
 
   createTask(body) {

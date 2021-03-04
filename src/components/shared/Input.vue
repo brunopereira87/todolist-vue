@@ -1,7 +1,16 @@
 <template>
   <div class="input">
     <label :for="name">{{label}}</label>
-    <input :type="type" :value="value" @blur="v.$touch" :id="name" :name="name" @input="update($event.target.value)">
+    <textarea v-if="type === 'textarea'" :value="value" @blur="v && v.$touch" :id="name" :name="name" 
+    @input="update($event.target.value)" rows="5"></textarea>
+    <select v-else-if="type === 'select'" :name="name" :id="name" @change="v && v.$touch" 
+      @input="update($event.target.value)" >
+      <option value="">Selectione o item desejado...</option>
+      <option v-for="option in options" :value="option.value" :key="option.value">
+        {{option.label}}
+      </option>
+    </select>
+    <input v-else :type="type" :value="value" @blur="v && v.$touch" :id="name" :name="name" @input="update($event.target.value)">
     <p class="error" v-for="(error, index) in errors" :key="index" >{{error}}</p>
   </div>
 </template>
@@ -20,10 +29,13 @@ const TEMPLATES_MAP = {
 
 export default {
   name: "Input",
-  props:['type', 'label', 'value', 'name','required', 'v'],
+  props:['type', 'label', 'value', 'name','required', 'v','options'],
   methods: {
     update(value){
-      this.v.$touch();
+      if(this.v) {
+        this.v.$touch()
+      }
+
       this.$emit('input', value);
     },
     validate(value){
@@ -59,7 +71,7 @@ export default {
   },
   computed: {
     errors() {
-      if (!this.invalid) {
+      if (!this.v || !this.invalid) {
         return [];
       }
       return Object.keys(this.v.$params).reduce(
@@ -74,7 +86,8 @@ export default {
       );
     },
     invalid() {
-      return this.v.$dirty && this.v.$invalid;
+
+      return this.v ? this.v.$dirty && this.v.$invalid : true;
     }
   },
 }
@@ -92,9 +105,11 @@ export default {
   @include textcolor('dark');
 }
 
-.input input{
-  padding: .3em;
-  width: 100%;
+.input {
+  input, textarea, select{
+    padding: .3em;
+    width: 100%;
+  }
 }
 
 .error{

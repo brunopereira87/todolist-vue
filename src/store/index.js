@@ -17,7 +17,8 @@ export default new Vuex.Store({
   state: {
     user: cleanedUser,
     logged:false,
-    error: null,
+    alertMessage: null,
+    alertType: "info",
     loading: false
   },
   mutations: {
@@ -27,8 +28,11 @@ export default new Vuex.Store({
     UPDATE_LOGGED(state, payload){
       state.logged = payload;
     },
-    UDPATE_ERROR(state, payload){
-      state.error = payload;
+    UDPATE_ALERT_MESSAGE(state, payload){
+      state.alertMessage = payload;
+    },
+    UDPATE_ALERT_TYPE(state, payload){
+      state.alertType = payload;
     },
     UPDATE_LOADING(state, payload){
       state.loading = payload;
@@ -56,9 +60,14 @@ export default new Vuex.Store({
       }     
 
     },
-    setError(context, error){
-      console.log(error)
-    }
+    setAlert(context, alert){
+      context.commit('UDPATE_ALERT_MESSAGE', alert.message)
+      context.commit('UDPATE_ALERT_TYPE', alert.type)
+    },
+    resetAlert(context){
+      context.commit('UDPATE_ALERT_MESSAGE', null)
+      context.commit('UDPATE_ALERT_TYPE', 'info')
+    },
   },
   modules: {
   }

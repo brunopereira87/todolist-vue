@@ -6,7 +6,7 @@
       <Input type="password" name="password" label="Senha" v-model="password" :v="$v.password" />
       <Button v-if="loading" :disabled="true">Carregando...</Button>
       <Button :disabled="$v.$invalid" v-else>Enviar</Button>
-      <ErrorComponent v-if="error" :error="error" />
+      <!-- <Alert v-if="error" :message="error" type="error" /> -->
     </form>
   </section>
 </template>
@@ -14,7 +14,7 @@
 <script>
 import Input from '@/components/shared/Input';
 import Button from '@/components/shared/Button';
-import ErrorComponent from '@/components/shared/ErrorComponent';
+import Alert from '@/components/shared/Alert';
 import { required, email, minLength } from 'vuelidate/lib/validators';
 import authService from '@/services/auth';
 import { setToken, getErrorMessage } from '@/helpers'; 
@@ -23,7 +23,7 @@ export default {
   components:{
     Input,
     Button,
-    ErrorComponent
+    // Alert
   },
   data() {
     return {
@@ -56,10 +56,15 @@ export default {
         this.UPDATE_USER(user);
         this.UPDATE_LOGGED(true);
 
-        this.$router.push('/categorias');
+        this.$router.push('/tarefas');
         
       }catch(err){
         this.error = getErrorMessage(err);
+        this.$store.dispatch('setAlert',{
+          message: this.error,
+          type: 'error'
+        })
+
       }
       finally{
         this.loading = false;

@@ -24,6 +24,11 @@ export default {
   box-sizing: border-box;
   transition: 0.1s;
   font-weight: 700;
+
+  &.disabled{
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
 }
 
 .button:hover,
