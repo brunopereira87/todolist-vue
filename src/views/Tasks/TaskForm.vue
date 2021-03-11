@@ -58,8 +58,8 @@ export default {
 
   methods:{
     ...mapMutations(['']),
-    handleSubmit(){
-      
+    async handleSubmit(){
+      await this.createTask();
     },
     async createTask(){
       let deadline = this.task.date || "";
@@ -71,8 +71,11 @@ export default {
       }
     
       try{
-        const { data } = await taskService.createTask(newTask)
-        
+        console.log('create task')
+        //const { data } = await taskService.createTask(newTask);
+        this.clearForm();
+        this.$v.$reset();
+        //this.$emit('taskSubmit');
       }catch(err){
         console.log(err)
       }
@@ -85,6 +88,16 @@ export default {
       }catch(err){
         console.log(err)
       }
+    },
+    clearForm(){
+      this.task = {
+        name: null,
+        description: null,
+        date: null,
+        time:null,
+        category_id: null
+      };
+      this.$v
     },
     getOptions(list, labelField, valueField){
       const optionsArray = list.map( item => {

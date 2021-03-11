@@ -4,7 +4,7 @@
       <h2 class="title section-title">
         {{previous_task ? 'Editar ': 'Nova '}} Tarefa
       </h2>
-      <TaskForm v-if="newForm" />
+      <TaskForm v-if="newForm" @taskSubmit="getTasks" />
     </div>
     <div class="task">
       <h2 class="title section-title">Suas Tarefas</h2>

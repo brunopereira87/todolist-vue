@@ -16,7 +16,7 @@ import axios from 'axios';
 // jest.mock('@/services/auth');
 import api from '@/services/index';
 import authService from '@/services/auth';
-import data from '../../__mocks__/auth.json';
+import data from '../../../__mocks__/auth.json';
 
 describe('POST requests', () => {
   let body;
@@ -55,7 +55,7 @@ describe('POST requests', () => {
       const resp = await authService.register(body);
       expect(resp.data).toBe(data)
     });
-    it('should throw an error when api.register promise be rejected', async () => {
+    it('should throw an error when authService.register promise be rejected', async () => {
       api.post.mockImplementationOnce(()=> 
         Promise.reject(new Error(errorMessage))
       );
@@ -95,6 +95,42 @@ describe('POST requests', () => {
       );
    
       await expect(authService.login(body)).rejects.toThrow(errorMessage);
+    });
+  });
+
+  describe('logout', () => {
+    beforeEach(()=>{
+      authService.logout();
+    });
+
+    it('should call api.post method', () => {
+      expect(api.post).toHaveBeenCalledTimes(1);
+    });
+
+    it('should  call api.post with the proper url', () => {
+      expect(api.post).toHaveBeenCalledWith('/auth/logout');
+    });
+
+    it('should return a object with logged out message', async () => {
+      const message = 'Logged out';
+      
+      api.post.mockImplementationOnce(()=> {
+        return Promise.resolve({
+          message
+        });
+      })
+
+      await expect(authService.logout()).resolves.toEqual({
+        message
+      })
+    });
+
+    it('should throw a error when authService.logout be reject', async () => {
+      api.post.mockImplementationOnce(()=>{
+        return Promise.reject(new Error(errorMessage))
+      });
+
+      await expect(authService.logout()).rejects.toThrow(errorMessage);
     });
   });
 });

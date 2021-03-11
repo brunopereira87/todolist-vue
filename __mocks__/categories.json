@@ -1,0 +1,49 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Lazer",
+      "icon": "fas fa-gamepad",
+      "created_at": "2021-01-03T20:52:11.000000Z",
+      "updated_at": "2021-02-10T13:03:15.000000Z",
+      "user_id": 2,
+      "tasks_count": 0
+    },
+    {
+      "id": 2,
+      "name": "Estudos",
+      "icon": "fas fa-pen",
+      "created_at": "2021-01-03T20:52:41.000000Z",
+      "updated_at": "2021-02-10T13:01:21.000000Z",
+      "user_id": 2,
+      "tasks_count": 4
+    },
+    {
+      "id": 3,
+      "name": "Trabalho",
+      "icon": "fas fa-business-time",
+      "created_at": "2021-01-03T20:53:05.000000Z",
+      "updated_at": "2021-01-03T20:53:05.000000Z",
+      "user_id": 2,
+      "tasks_count": 1
+    },
+    {
+      "id": 7,
+      "name": "Jardinagem",
+      "icon": "fas fa-seedling",
+      "created_at": "2021-02-03T19:24:23.000000Z",
+      "updated_at": "2021-02-03T19:24:23.000000Z",
+      "user_id": 2,
+      "tasks_count": 0
+    },
+    {
+      "id": 8,
+      "name": "Esporte",
+      "icon": "fas fa-futbol",
+      "created_at": "2021-02-03T19:26:05.000000Z",
+      "updated_at": "2021-02-03T19:26:05.000000Z",
+      "user_id": 2,
+      "tasks_count": 0
+    }
+  ]
+}
