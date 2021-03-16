@@ -8,7 +8,7 @@
     </div>
     <div class="task">
       <h2 class="title section-title">Suas Tarefas</h2>
-      <TasksList v-if="tasks" :tasks="tasks" />
+      <TasksList v-if="tasksData" :tasksData="tasksData" />
     </div>
   </section>
 </template>
@@ -28,14 +28,14 @@ export default {
     return {
       previous_task: null,
       newForm: true,
-      tasks: null
+      tasksData: null
     }
   },
   methods:{
     async getTasks(){
       try{
         const { data } = await taskService.getTasks()
-        this.tasks = data.tasks;
+        this.tasksData = data;
       }catch(err) {
         console.log(err)
       }

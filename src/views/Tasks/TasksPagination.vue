@@ -1,16 +1,20 @@
 <template>
-  <div class="pagination"></div>
+  <ul class="pagination">
+    <li v-for="page in total_pages" :key="page">
+      <router-link :to="{query:{ page }  }">{{page}}</router-link>
+    </li>
+  </ul>
 </template>
 
 <script>
 export default {
   name: 'TasksPagination',
   props:{
-    totalItens: {
+    total_pages: {
       type: Number,
       default: 1
     },
-    perPage: {
+    current_page: {
       type: Number,
       default:1
     }
